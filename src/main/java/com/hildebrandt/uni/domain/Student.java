@@ -16,11 +16,11 @@ public class Student {
     private Integer matrikelnumber;
     private String gender;
 
-    @ManyToMany
+    /*@ManyToMany
     @JoinTable(name="student_lecture",
             joinColumns = @JoinColumn(name = "student_id"),
             inverseJoinColumns = @JoinColumn(name = "lecture_id"))
-    private Set<Lecture> lectures = new HashSet<>();
+    private Set<Lecture> lectures = new HashSet<>();*/
 
     public Student(){}
 
@@ -70,11 +70,12 @@ public class Student {
         this.gender = gender;
     }
 
+    /*
     public Set<Lecture> getLectures() {
         return lectures;
     }
 
     public void setLectures(Set<Lecture> lectures) {
         this.lectures = lectures;
-    }
+    }*/
 }

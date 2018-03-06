@@ -39,9 +39,9 @@
                 <td th:text="${student.lastName}"></td>
                 <td th:text="${student.gender}"></td>
                 <td th:text="${student.matrikelnumber}"></td>
-                <td><a href="#" th:href="@{'/recipe/' + ${student.id} + '/show'}">View</a></td>
-                <td><a href="#" th:href="@{'/recipe/' + ${student.id} + '/update'}">Update</a></td>
-                <td><a href="#" th:href="@{'/recipe/' + ${student.id} + '/delete'}">Delete</a></td>
+                <td><a href="#" th:href="@{'/student/' + ${student.id} + '/show'}">View</a></td>
+                <td><a href="#" th:href="@{'/student/' + ${student.id} + '/update'}">Update</a></td>
+                <td><a href="#" th:href="@{'/student/' + ${student.id} + '/delete'}">Delete</a></td>
             </tr>
         </table>
     </div>
