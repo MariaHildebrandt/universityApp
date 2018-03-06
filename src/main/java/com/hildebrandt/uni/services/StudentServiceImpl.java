@@ -39,7 +39,19 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public void deleteById(Long idToDelete) {
-        //StudentRepository.deleteById(idToDelete);
+        studentRepository.deleteById(idToDelete);
+    }
+
+    @Override
+    public Student editById(Long id){
+        Optional<Student> studentOptional = studentRepository.findById(id);
+
+        if (!studentOptional.isPresent()) {
+            throw new RuntimeException("Student Not Found!");
+        }
+        //do stuff
+
+        return studentOptional.get();
     }
 
 
