@@ -43,15 +43,16 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public Student editById(Long id){
-        Optional<Student> studentOptional = studentRepository.findById(id);
-
-        if (!studentOptional.isPresent()) {
-            throw new RuntimeException("Student Not Found!");
-        }
-        //do stuff
-
-        return studentOptional.get();
+    public Student editStudent(Student student){
+        Student editStudent = studentRepository.save(student);
+        return editStudent;
+        /*
+        command.setId(source.getId());
+        command.setCookTime(source.getCookTime());
+        command.setPrepTime(source.getPrepTime());
+        command.setDescription(source.getDescription());
+        command.setDifficulty(source.getDifficulty());
+         */
     }
 
 

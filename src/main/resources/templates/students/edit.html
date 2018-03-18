@@ -16,7 +16,7 @@
 </head>
 <body>
 <div class="container">
-    <form>
+    <form th:object="${student}" th:action="@{/student/}" method="post">
         <div class="form-group">
             <label for="firstName">First name</label>
             <input type="text" class="form-control" id="firstName" aria-describedby="firstName" th:field="${student.firstName}">

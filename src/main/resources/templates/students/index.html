@@ -40,7 +40,7 @@
                 <td th:text="${student.gender}"></td>
                 <td th:text="${student.matrikelnumber}"></td>
                 <td><a href="#" th:href="@{'/student/' + ${student.id} + '/show'}">View</a></td>
-                <td><a href="#" th:href="@{'/student/' + ${student.id} + '/edit'}">Edit</a></td>
+                <td><a href="#" th:href="@{'/student/' + ${student.id} + '/update'}">Edit</a></td>
                 <td><a href="#" th:href="@{'/student/' + ${student.id} + '/delete'}">Delete</a></td>
             </tr>
             <tr>
