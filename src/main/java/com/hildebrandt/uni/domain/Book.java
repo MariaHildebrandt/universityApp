@@ -1,9 +1,11 @@
 package com.hildebrandt.uni.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import java.util.Calendar;
+import java.util.Date;
 
 @Entity
 public class Book {
@@ -12,14 +14,37 @@ public class Book {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String Title;
-    private String Author;
+    @NotEmpty
+    private String title;
+
+    @NotEmpty
+    private String author;
+
+    @NotEmpty
+    private String category;
+
+    @Column(name = "Year")
+    @DateTimeFormat(pattern = "yyyy")
+    private Date dateField;
+
+    @Lob
+    private String description;
 
     public Book(){}
 
-    public Book(String title, String author) {
-        Title = title;
-        Author = author;
+    public Book(@NotEmpty String title, @NotEmpty String author, @NotEmpty String category, Date dateField, String description) {
+        this.title = title;
+        this.author = author;
+        this.category = category;
+        this.dateField = dateField;
+        this.description = description;
+    }
+
+    public Book(@NotEmpty String title, @NotEmpty String author, @NotEmpty String category, String description) {
+        this.title = title;
+        this.author = author;
+        this.category = category;
+        this.description = description;
     }
 
     public Long getId() {
@@ -31,18 +56,42 @@ public class Book {
     }
 
     public String getTitle() {
-        return Title;
+        return title;
     }
 
     public void setTitle(String title) {
-        Title = title;
+        this.title = title;
     }
 
     public String getAuthor() {
-        return Author;
+        return author;
     }
 
     public void setAuthor(String author) {
-        Author = author;
+        this.author = author;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Date getDateField() {
+        return dateField;
+    }
+
+    public void setDateField(Date dateField) {
+        this.dateField = dateField;
     }
 }

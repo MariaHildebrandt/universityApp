@@ -15,7 +15,7 @@
             th:src="@{/webjars/bootstrap/4.0.0-1/js/bootstrap.min.js}"></script>
 </head>
 <body>
-<div class="container">
+<div class="container" >
     <form th:object="${book}" th:action="@{/book}" th:method="post">
         <div class="">
             <h3>Create Form</h3>
@@ -31,7 +31,23 @@
             <label for="author">Author</label>
             <input type="text" class="form-control" id="author" aria-describedby="author" th:field="*{author}"/>
         </div>
-        <button type="submit" class="btn btn-primary">Neues Buch Speichern</button>
+        <div class="form-group">
+            <label for="category">Category</label>
+            <input type="text" class="form-control" id="category" th:field="*{category}"/>
+        </div>
+        <div class="form-group">
+            <label for="date">Year</label>
+            <input type="text" class="form-control" id="date" th:field="*{dateField}"/>
+        </div>
+        <div class="form-group">
+            <label for="description">Description</label>
+            <textarea rows="4" type="textarea" class="form-control" id="description" th:field="*{description}"/></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Create</button>
+        <button type="submit" class="btn btn-primary"><a href="#" th:href="@{'/books'}">Back</a></button>
+        <button type="submit" class="btn btn-primary">
+            <a href="#" th:href="@{'/book/delete/' + ${book.id}}">Delete</a>
+        </button>
     </form>
 </div>
 </body>

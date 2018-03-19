@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8"/>
-    <title>Recipe Home</title>
+    <title>Book Show Form</title>
 
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
@@ -15,32 +15,39 @@
             th:src="@{/webjars/bootstrap/4.0.0-1/js/bootstrap.min.js}"></script>
 </head>
 <body>
-<h1 class="panel-title">students!</h1>
-<div class="table-responsive" th:if="${not #lists.isEmpty(books)}">
-    <table class="table table-hover ">
+<div class="table-responsive">
+    <table  th:object="${book}" class="table">
         <tr>
-            <th>ID</th>
             <th>Title</th>
             <th>Author</th>
-            <th>Description</th>
+            <th>Category</th>
+            <th>Year</th>
+            <th>Desciption</th>
         </tr>
         <tr th:remove="all">
-            <td>123</td>
-            <td>Java</td>
-            <td>Max Mustermann</td>
+            <td>Title</td>
+            <td>Author</td>
+            <td>Category</td>
+            <td>Year</td>
             <td>Description</td>
         </tr>
-        <tr th:each="book : ${books}">
-            <td th:text="${book.id}"></td>
-            <td th:text="${book.title}"></td>
-            <td th:text="${book.author}"></td>
-            <td th:text="${book.description}"></td>
+        <tr>
+            <td  th:text="${book.title}"></td>
+            <td  th:text="${book.author}"></td>
+            <td  th:text="${book.category}"></td>
+            <td  th:value="${book.dateField}"></td>
+            <td  th:text="${book.description}"></td>
+        </tr>
+        <tr>
+            <td><a href="#" th:href="@{'/books'}">Back</a></td>
             <td><a href="#" th:href="@{'/book/' + ${book.id}}">Edit</a></td>
             <td><a href="#" th:href="@{'/book/delete/' + ${book.id}}">Delete</a></td>
+            <td></td>
+            <td></td>
         </tr>
     </table>
 
+
 </div>
-<a href="#" th:href="@{'/book/create'}">New Book</a>
 </body>
 </html>

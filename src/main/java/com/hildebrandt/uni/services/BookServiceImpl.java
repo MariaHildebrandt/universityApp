@@ -1,11 +1,7 @@
 package com.hildebrandt.uni.services;
 
 import com.hildebrandt.uni.domain.Book;
-import com.hildebrandt.uni.domain.Student;
 import com.hildebrandt.uni.repositories.BookRepository;
-import com.hildebrandt.uni.repositories.StudentRepository;
-import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
@@ -45,6 +41,10 @@ public class BookServiceImpl implements BookService {
         Book currentBook = findById(id);
         currentBook.setTitle(book.getTitle());
         currentBook.setAuthor(book.getAuthor());
+        currentBook.setCategory(book.getCategory());
+        currentBook.setDescription(book.getDescription());
+        currentBook.setDateField(book.getDateField());
+
         bookRepository.save(currentBook);
     }
 

@@ -21,10 +21,8 @@ public class BookController {
     }
 
     /*---Add new book---*/
-    //@PostMapping("/book")
     @RequestMapping(path = "/book", method = RequestMethod.POST)
     public String save(Book book) {
-
         long id = bookService.create(book);
         return "redirect:/book/" + id;
     }
@@ -34,7 +32,7 @@ public class BookController {
     public String get(@PathVariable("id") long id, Model model) {
         Book book = bookService.findById(id);
         model.addAttribute("book", book);
-        return "books/show";    }
+        return "books/edit";    }
 
     /*---get all books---*/
     @GetMapping("/books")
