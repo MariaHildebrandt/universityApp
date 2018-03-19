@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Book Show Form</title>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          th:href="@{/webjars/bootstrap/4.0.0-1/css/bootstrap.min.css}">
+
+    <script src="/webjars/jquery/3.3.1-1/jquery.min.js"></script>
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            th:src="@{/webjars/bootstrap/4.0.0-1/js/bootstrap.min.js}"></script>
+</head>
+<body>
+<div class="container">
+    <form th:object="${book}" th:method="post">
+        <div class="form-group">
+            <label for="title">First name</label>
+            <input type="text" class="form-control" id="title" aria-describedby="firstName" th:field="${book.title}">
+        </div>
+        <div class="form-group">
+            <label for="author">Last Name</label>
+            <input type="text" class="form-control" id="author" aria-describedby="lastName" th:field="${book.author}"/>
+        </div>
+        <button type="submit" class="btn btn-primary">Save Edit</button>
+    </form>
+</div>
+</body>
+</html>

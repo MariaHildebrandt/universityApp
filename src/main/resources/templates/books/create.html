@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>New Student Form</title>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          th:href="@{/webjars/bootstrap/4.0.0-1/css/bootstrap.min.css}">
+
+    <script src="/webjars/jquery/3.3.1-1/jquery.min.js"></script>
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            th:src="@{/webjars/bootstrap/4.0.0-1/js/bootstrap.min.js}"></script>
+</head>
+<body>
+<div class="container">
+    <form th:object="${book}" th:action="@{/book}" th:method="post">
+        <div class="">
+            <h3>Create Form</h3>
+        </div>
+        <div class="form-group">
+            <input type="hidden" class="form-control" th:field="*{id}"/>
+        </div>
+        <div class="form-group">
+            <label for="title">title</label>
+            <input type="text" class="form-control" id="title" aria-describedby="title" th:field="*{title}">
+        </div>
+        <div class="form-group">
+            <label for="author">Author</label>
+            <input type="text" class="form-control" id="author" aria-describedby="author" th:field="*{author}"/>
+        </div>
+        <button type="submit" class="btn btn-primary">Neues Buch Speichern</button>
+    </form>
+</div>
+</body>
+</html>

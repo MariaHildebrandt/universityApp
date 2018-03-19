@@ -25,11 +25,29 @@ public class StudentController {
         return "students/index";
     }
 
+    //NEW
     @RequestMapping(path = "/student/new", method = RequestMethod.GET)
-    public String createProduct(Model model) {
+    public String newProduct(Model model) {
         model.addAttribute("student", new Student());
-        return "students/edit";
+        return "students/new";
     }
+
+    //CREATE
+    @RequestMapping(path = "/student/create", method = RequestMethod.POST)
+    public String createProduct(Student student) {
+        System.out.println("Creating Student in Conroller" + student.getFirstName());
+
+        /*
+        if(userService.isUserExist(user)){
+            System.out.println("A User with name "+user.getName()+" already exist");
+            return new ResponseEntity<Void>(HttpStatus.CONFLICT);
+        }
+         */
+
+        studentService.newStudent(student);
+        return "redirect:/students";
+    }
+
 
     //READ
     //sollte hier nicht "Long.valueOf(id)" stehen?
