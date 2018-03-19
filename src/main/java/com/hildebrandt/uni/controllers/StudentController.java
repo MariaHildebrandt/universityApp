@@ -1,6 +1,7 @@
 package com.hildebrandt.uni.controllers;
 
 import com.hildebrandt.uni.domain.Student;
+import com.hildebrandt.uni.exception.ResourceNotFoundException;
 import com.hildebrandt.uni.services.StudentService;
 import org.springframework.stereotype.Controller;
 import lombok.extern.slf4j.Slf4j;
@@ -18,16 +19,16 @@ public class StudentController {
     }
 
     //SHOW ALL STUDENTS
-    @RequestMapping({ "/students"})
+    @GetMapping({ "/students"})
     public String getIndexPage(Model model) {
         model.addAttribute("students", studentService.getStudents());
         return "students/index";
     }
 
-    //wie CREATE?
-    @PostMapping({"/student/new"})
-    public String newStudent() {
-        return "students/new";
+    @RequestMapping(path = "/student/new", method = RequestMethod.GET)
+    public String createProduct(Model model) {
+        model.addAttribute("student", new Student());
+        return "students/edit";
     }
 
     //READ
@@ -38,16 +39,31 @@ public class StudentController {
         return "students/show";
     }
 
-    //wie UPDATE?
-    @GetMapping("student/{id}/update")
-    public String editStudentById(@PathVariable String id, Model model){
-        Student student = studentService.findById(Long.valueOf(id));
-        model.addAttribute("student", studentService.editStudent(student));
+    //EDIT
+    @GetMapping("student/{id}/edit")
+    public String editStudentById(@PathVariable Long id, Model model){
+        model.addAttribute("student", studentService.findById(id));
         return "students/edit";
     }
 
+    //UPDATE
+    @RequestMapping(path = "student/{id}/update", method = RequestMethod.POST)
+    public String updateStudent(@PathVariable Long id, Student student) {
+
+        Student currentStudent = studentService.findById(id);//.orElseThrow(() -> new ResourceNotFoundException("Student", "id", id));
+
+        currentStudent.setFirstName(student.getFirstName());
+        currentStudent.setLastName(student.getLastName());
+        currentStudent.setMatrikelnumber(student.getMatrikelnumber());
+        currentStudent.setGender(student.getGender());
+
+        studentService.updateStudent(currentStudent);
+        return "redirect:/students";
+    }
+
+
     //DELETE
-    @GetMapping("student/{id}/delete")
+    @DeleteMapping("student/{id}/delete")
     public String deleteStudentById(@PathVariable String id){
         log.debug("Deleting id: " + id);
         studentService.deleteById(Long.valueOf(id));

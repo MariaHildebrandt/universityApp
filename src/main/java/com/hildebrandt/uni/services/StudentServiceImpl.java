@@ -4,6 +4,7 @@ import com.hildebrandt.uni.domain.Student;
 import com.hildebrandt.uni.repositories.StudentRepository;
 import org.springframework.stereotype.Service;
 
+import lombok.extern.slf4j.Slf4j;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
@@ -43,16 +44,21 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public Student editStudent(Student student){
-        Student editStudent = studentRepository.save(student);
-        return editStudent;
-        /*
-        command.setId(source.getId());
-        command.setCookTime(source.getCookTime());
-        command.setPrepTime(source.getPrepTime());
-        command.setDescription(source.getDescription());
-        command.setDifficulty(source.getDifficulty());
-         */
+    public void updateStudent(Student student){
+        studentRepository.save(student);
+    }
+
+    @Override
+    public void newStudent(Student student){
+        Student newStudent = new Student();
+
+        newStudent.setFirstName(student.getFirstName());
+        System.out.println("New Student: " + student.getFirstName());
+        newStudent.setLastName(student.getLastName());
+        newStudent.setMatrikelnumber(student.getMatrikelnumber());
+        newStudent.setGender(student.getGender());
+
+        studentRepository.save(newStudent);
     }
 
 

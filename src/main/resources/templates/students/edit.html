@@ -16,7 +16,7 @@
 </head>
 <body>
 <div class="container">
-    <form th:object="${student}" th:action="@{/student/}" method="post">
+    <form th:object="${student}" th:action="@{/student/{id}/update(id=${student.id})}" th:method="post">
         <div class="form-group">
             <label for="firstName">First name</label>
             <input type="text" class="form-control" id="firstName" aria-describedby="firstName" th:field="${student.firstName}">
@@ -36,8 +36,6 @@
             <label for="martikelnumber">Password</label>
             <input type="number" class="form-control" id="martikelnumber" th:field="${student.matrikelnumber}">
         </div>
-
-
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 </div>

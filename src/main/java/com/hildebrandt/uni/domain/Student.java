@@ -2,6 +2,7 @@ package com.hildebrandt.uni.domain;
 
 import javax.persistence.*;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -78,4 +79,27 @@ public class Student {
     public void setLectures(Set<Lecture> lectures) {
         this.lectures = lectures;
     }*/
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Student student = (Student) o;
+        return Objects.equals(id, student.id) &&
+                Objects.equals(firstName, student.firstName) &&
+                Objects.equals(lastName, student.lastName) &&
+                Objects.equals(matrikelnumber, student.matrikelnumber) &&
+                Objects.equals(gender, student.gender);
+    }
+
+    @Override
+    public String toString() {
+        return "Student{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", matrikelnumber=" + matrikelnumber +
+                ", gender='" + gender + '\'' +
+                '}';
+    }
 }
