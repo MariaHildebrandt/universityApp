@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+    <title>Edit Product Details</title>
+    <th:block th:include="layout/header"></th:block>
+</head>
+<body>
+<div class="container">
+    <div th:if="${not #lists.isEmpty(categories)}">
+        <table class="table table-striped">
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th></th>
+                <th></th>
+            </tr>
+            <tr th:remove="all">
+                <td>123</td>
+                <td>Fantasy</td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr th:each="category : ${categories}">
+                <td th:text="${category.id}"></td>
+                <td th:text="${category.name}"></td>
+                <td><a th:href="@{'/category/' + ${category.id}}" class="btn btn-default">Edit</a></td>
+                <td><a th:href="@{'/category/delete/' + ${category.id}}" class="btn btn-danger">Delete</a></td>
+            </tr>
+        </table>
+    </div>
+</div>
+</body>
+</html>

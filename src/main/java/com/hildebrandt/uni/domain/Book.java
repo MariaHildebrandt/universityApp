@@ -4,10 +4,12 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
-import java.util.Calendar;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
+@Table(name = "books")
 public class Book {
 
     @Id
@@ -20,8 +22,11 @@ public class Book {
     @NotEmpty
     private String author;
 
-    @NotEmpty
-    private String category;
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "book_category",
+            joinColumns = { @JoinColumn(name = "book_id") },
+            inverseJoinColumns = { @JoinColumn(name = "category_id") })
+    private Set<Category> categories = new HashSet<>();
 
     @Column(name = "Year")
     @DateTimeFormat(pattern = "yyyy")
@@ -32,19 +37,28 @@ public class Book {
 
     public Book(){}
 
-    public Book(@NotEmpty String title, @NotEmpty String author, @NotEmpty String category, Date dateField, String description) {
+    //ohne Categories
+    public Book(@NotEmpty String title, @NotEmpty String author, Date dateField, String description) {
         this.title = title;
         this.author = author;
-        this.category = category;
         this.dateField = dateField;
         this.description = description;
     }
 
-    public Book(@NotEmpty String title, @NotEmpty String author, @NotEmpty String category, String description) {
+    public Book(@NotEmpty String title, @NotEmpty String author, Set<Category> categories, Date dateField, String description) {
         this.title = title;
         this.author = author;
-        this.category = category;
+        this.categories = categories;
+        this.dateField = dateField;
         this.description = description;
+    }
+
+    public Set<Category> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(Set<Category> categories) {
+        this.categories = categories;
     }
 
     public Long getId() {
@@ -71,13 +85,6 @@ public class Book {
         this.author = author;
     }
 
-    public String getCategory() {
-        return category;
-    }
-
-    public void setCategory(String category) {
-        this.category = category;
-    }
 
     public String getDescription() {
         return description;

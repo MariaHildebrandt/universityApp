@@ -1,46 +1,48 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8"/>
-    <title>Recipe Home</title>
-
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-          th:href="@{/webjars/bootstrap/4.0.0-1/css/bootstrap.min.css}">
-
-    <script src="/webjars/jquery/3.3.1-1/jquery.min.js"></script>
-
-    <!-- Latest compiled and minified JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
-            th:src="@{/webjars/bootstrap/4.0.0-1/js/bootstrap.min.js}"></script>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+    <title>Edit Product Details</title>
+    <th:block th:include="layout/header"></th:block>
 </head>
 <body>
-<h1 class="panel-title">students!</h1>
-<div class="table-responsive" th:if="${not #lists.isEmpty(books)}">
-    <table class="table table-hover ">
-        <tr>
-            <th>ID</th>
-            <th>Title</th>
-            <th>Author</th>
-            <th>Description</th>
-        </tr>
-        <tr th:remove="all">
-            <td>123</td>
-            <td>Java</td>
-            <td>Max Mustermann</td>
-            <td>Description</td>
-        </tr>
-        <tr th:each="book : ${books}">
-            <td th:text="${book.id}"></td>
-            <td th:text="${book.title}"></td>
-            <td th:text="${book.author}"></td>
-            <td th:text="${book.description}"></td>
-            <td><a href="#" th:href="@{'/book/' + ${book.id}}">Edit</a></td>
-            <td><a href="#" th:href="@{'/book/delete/' + ${book.id}}">Delete</a></td>
-        </tr>
-    </table>
-
+<div class = "container">
+    <div th:if="${not #lists.isEmpty(books)}">
+        <table class="table table-striped">
+            <tr>
+                <th>ID</th>
+                <th>Title</th>
+                <th>Author</th>
+                <th>Description</th>
+                <th>Category</th>
+                <th></th>
+                <th></th>
+            </tr>
+            <tr th:remove="all">
+                <td>123</td>
+                <td>Java</td>
+                <td>Max Mustermann</td>
+                <td>Description</td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr th:each="book : ${books}">
+                <td th:text="${book.id}"></td>
+                <td th:text="${book.title}"></td>
+                <td th:text="${book.author}"></td>
+                <td th:text="${book.description}"></td>
+                <td>
+                    <ul>
+                        <th:block th:each="category : ${categories}">
+                            <li th:text="${category.name}">Item description here...</li>
+                        </th:block>
+                    </ul>
+                </td>
+                <td><a th:href="@{'/book/' + ${book.id}}" class="btn btn-default">Edit</a></td>
+                <td><a th:href="@{'/book/delete/' + ${book.id}}" class="btn btn-danger">Delete</a></td>
+            </tr>
+        </table>
+    </div>
 </div>
-<a href="#" th:href="@{'/book/create'}">New Book</a>
 </body>
 </html>

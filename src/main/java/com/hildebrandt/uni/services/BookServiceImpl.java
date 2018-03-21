@@ -41,7 +41,7 @@ public class BookServiceImpl implements BookService {
         Book currentBook = findById(id);
         currentBook.setTitle(book.getTitle());
         currentBook.setAuthor(book.getAuthor());
-        currentBook.setCategory(book.getCategory());
+        //currentBook.setCategories(book.getCategories());
         currentBook.setDescription(book.getDescription());
         currentBook.setDateField(book.getDateField());
 
