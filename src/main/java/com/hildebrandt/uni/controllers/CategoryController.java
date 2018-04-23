@@ -27,7 +27,7 @@ public class CategoryController {
     @RequestMapping(path = "/category", method = RequestMethod.POST)
     public String save(Category category) {
         long id = categoryService.create(category);
-        return "redirect:/category/" + id;
+        return "redirect:/categories";
     }
 
     /*---Get a Category by id---*/

@@ -32,7 +32,7 @@ public class BookController {
     @RequestMapping(path = "/book", method = RequestMethod.POST)
     public String save(Book book) {
         long id = bookService.create(book);
-        return "redirect:/book/" + id;
+        return "redirect:/books";
     }
 
     /*---Get a book by id---*/
