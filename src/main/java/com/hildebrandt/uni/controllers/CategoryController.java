@@ -1,5 +1,6 @@
 package com.hildebrandt.uni.controllers;
 
+import com.hildebrandt.uni.domain.Book;
 import com.hildebrandt.uni.domain.Category;
 import com.hildebrandt.uni.services.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import java.util.Set;
 
 @Controller
 public class CategoryController {
@@ -36,6 +39,16 @@ public class CategoryController {
         Category category = categoryService.findById(id);
         model.addAttribute("category", category);
         return "categories/edit";
+    }
+
+    /*---Get Books per Category---*/
+    @GetMapping("/category/books/{id}")
+    public String getBooksPerCategory(@PathVariable("id") long id, Model model) {
+        Category category = categoryService.findById(id);
+        Set<Book> books = category.getBooks();
+        model.addAttribute("category", category);
+        model.addAttribute("books", books);
+        return "categories/showBooks";
     }
 
     /*---get all Categories---*/

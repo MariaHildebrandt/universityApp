@@ -2,6 +2,7 @@ package com.hildebrandt.uni.domain;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -14,7 +15,6 @@ public class Category {
     @NotEmpty
     private String name;
 
-
     @ManyToMany(mappedBy = "categories")
     private Set<Book> books;
 
@@ -22,11 +22,6 @@ public class Category {
 
     public Category(@NotEmpty String name) {
         this.name = name;
-    }
-
-    public Category(@NotEmpty String name, Set<Book> books) {
-        this.name = name;
-        this.books = books;
     }
 
     public Long getId() {
@@ -54,11 +49,18 @@ public class Category {
     }
 
     @Override
-    public String toString() {
-        return "Category{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", books=" + books +
-                '}';
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Category category = (Category) o;
+        return Objects.equals(id, category.id) &&
+                Objects.equals(name, category.name) &&
+                Objects.equals(books, category.books);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(id, name, books);
     }
 }

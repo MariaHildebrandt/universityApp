@@ -1,11 +1,13 @@
 package com.hildebrandt.uni.domain;
 
+import com.hildebrandt.uni.helperclasses.BookCategory;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -34,6 +36,7 @@ public class Book {
 
     @Lob
     private String description;
+
 
     public Book(){}
 
@@ -84,7 +87,6 @@ public class Book {
     public void setAuthor(String author) {
         this.author = author;
     }
-
 
     public String getDescription() {
         return description;

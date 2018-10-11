@@ -1,5 +1,6 @@
 package com.hildebrandt.uni.services;
 
+import com.hildebrandt.uni.domain.Book;
 import com.hildebrandt.uni.domain.Category;
 import com.hildebrandt.uni.repositories.CategoryRepository;
 import org.springframework.stereotype.Service;

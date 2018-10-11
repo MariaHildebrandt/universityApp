@@ -1,5 +1,6 @@
 package com.hildebrandt.uni.services;
 
+import com.hildebrandt.uni.domain.Book;
 import com.hildebrandt.uni.domain.Category;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +18,7 @@ public interface CategoryService {
     Long create(Category category);
 
     void update(Long id, Category category);
+
 
     //Set<Category> getCategoriesIdByBookId(Long BookId);
 }

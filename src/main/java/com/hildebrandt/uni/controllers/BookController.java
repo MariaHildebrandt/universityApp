@@ -2,6 +2,7 @@ package com.hildebrandt.uni.controllers;
 
 import com.hildebrandt.uni.domain.Book;
 import com.hildebrandt.uni.domain.Category;
+import com.hildebrandt.uni.helperclasses.BookCategory;
 import com.hildebrandt.uni.services.BookService;
 import com.hildebrandt.uni.services.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashSet;
 import java.util.Set;
 
 @Controller
@@ -20,11 +22,20 @@ public class BookController {
     private CategoryService categoryService;
 
     /*---Site for new book---*/
+    @RequestMapping( path = "/book/show/{id}")
+    public String showSingleBook(@PathVariable("id") long id, Model model) {
+        Book book = bookService.findById(id);
+        model.addAttribute("book", book);
+        return "books/show";
+    }
+
+    /*---Site for book details---*/
     @RequestMapping( path = "/book/create")
     public String loadForm(Model model) {
         model.addAttribute("book", new Book());
         Set<Category> categories = categoryService.getCategories();
         model.addAttribute("categories", categories);
+        //TODO dateformat on html template should show year only
         return "books/create";
     }
 
@@ -39,18 +50,19 @@ public class BookController {
     @GetMapping("/book/{id}")
     public String get(@PathVariable("id") long id, Model model) {
         Book book = bookService.findById(id);
+        Set<Category> categories = categoryService.getCategories();
+        model.addAttribute("allCategories", categories);
         model.addAttribute("book", book);
-
+        //TODO can create category but not edit
+        //TODO must allow multiple categories
         return "books/edit";
     }
 
     /*---get all books---*/
-    @GetMapping("/books")
+    @GetMapping({"/books", "/"})
     public String list(Model model) {
         model.addAttribute("books", bookService.getBooks());
-
         model.addAttribute("categories", categoryService.getCategories());
-        //model.addAttribute("categories", categoryService.getCategoriesIdByBookId(fakeId));
         return "books/index";
     }
 
